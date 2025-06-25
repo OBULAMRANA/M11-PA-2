@@ -125,6 +125,137 @@ Violin plot - condition vs price log
 ---
 ![image](https://github.com/user-attachments/assets/fc14714d-a9c9-4d11-93e8-4231e5be213b)
 
+Linear Regression
+---
+```
+lr = LinearRegression()
+lr.fit(x_train_sc, y_train)
+y_train_pred = lr.predict(x_train_sc)
+y_test_pred = lr.predict(x_test_sc)
+error_lr = ErMtx(y_train, y_train_pred, y_test, y_test_pred)
+error_lr
+
+{'Train_MAE': 128641.80233066343,
+ 'Train_MSE': 138362184547413.89,
+ 'Train_RMAE': np.float64(11762745.621130038),
+ 'Train_R2_Score': 3.8215959083931494e-06,
+ 'Test_MAE': 265422.82904034434,
+ 'Test_MSE': 500938166778833.25,
+ 'Test_RMAE': np.float64(22381647.99068275),
+ 'Test_R2_Score': -2.803322442024303e-05}
+
+
+error_lr['Model Name']='Linear Regression'
+error_lr
+model_evaluation = (pd.DataFrame([error_lr]))
+model_evaluation
+
+Train_MAE	Train_MSE	Train_RMAE	Train_R2_Score	Test_MAE	Test_MSE	Test_RMAE	Test_R2_Score	Model Name
+0	128641.80	138362184547413.89	11762745.62	0.00	265422.83	500938166778833.25	22381647.99	-0.00	Linear Regression
+
+```
+
+Losso Regression
+---
+```
+pipe = Pipeline([
+    ('scale', StandardScaler()),
+    ('poly', PolynomialFeatures()),
+    ('lasso', Lasso())
+])
+
+param_grid = {
+    'lasso__alpha': [0.01, 0.1, 1, 10, 100],
+    'poly__degree': [1,2,3,4]
+}
+     
+
+grid_search = GridSearchCV(pipe, param_grid, cv=5, scoring='neg_mean_squared_error')
+grid_search.fit(X_train, y_train)
+best_model_lasso = grid_search.best_estimator_
+print(best_model_lasso)
+     
+Pipeline(steps=[('scale', StandardScaler()),
+                ('poly', PolynomialFeatures(degree=1)),
+                ('lasso', Lasso(alpha=100))])
+
+lasso = Lasso(alpha=100)
+lasso.fit(x_train_sc, y_train)
+y_train_pred = lasso.predict(x_train_sc)
+y_test_pred = lasso.predict(x_test_sc)
+error_lasso = ErMtx(y_train, y_train_pred, y_test, y_test_pred)
+error_lasso['Model Name']='Lasso'
+error_lasso
+     
+{'Train_MAE': 128597.77719942686,
+ 'Train_MSE': 138362184644358.95,
+ 'Train_RMAE': np.float64(11762745.62525089),
+ 'Train_R2_Score': 3.820895249528888e-06,
+ 'Test_MAE': 265376.9606975887,
+ 'Test_MSE': 500938218691615.4,
+ 'Test_RMAE': np.float64(22381649.150400322),
+ 'Test_R2_Score': -2.8136858443161827e-05,
+ 'Model Name': 'Lasso'}
+
+model_evaluation = pd.concat([model_evaluation, (pd.DataFrame([error_lasso]))],ignore_index=True)
+model_evaluation
+     
+Train_MAE	Train_MSE	Train_RMAE	Train_R2_Score	Test_MAE	Test_MSE	Test_RMAE	Test_R2_Score	Model Name
+0	128641.80	138362184547413.89	11762745.62	0.00	265422.83	500938166778833.25	22381647.99	-0.00	Linear Regression
+1	128597.78	138362184644358.95	11762745.63	0.00	265376.96	500938218691615.38	22381649.15	-0.00	Lasso
+
+```
+Ridge Regression
+---
+```
+pipe = Pipeline([
+    ('scale', StandardScaler()),
+    ('poly', PolynomialFeatures()),
+    ('ridge', Ridge())
+])
+
+param_grid = {
+    'ridge__alpha': [0.01, 0.1, 1, 10, 100],
+    'poly__degree': [1,2,3,4]
+}
+     
+
+grid_search = GridSearchCV(pipe, param_grid, cv=5, scoring='neg_mean_squared_error')
+grid_search.fit(X_train, y_train)
+best_model_ridge = grid_search.best_estimator_
+print(best_model_ridge)
+     
+Pipeline(steps=[('scale', StandardScaler()),
+                ('poly', PolynomialFeatures(degree=1)),
+                ('ridge', Ridge(alpha=100))])
+
+best_model_ridge = Ridge(alpha=10)
+best_model_ridge.fit(X_train, y_train)
+y_train_pred = best_model_ridge.predict(X_train)
+y_test_pred = best_model_ridge.predict(X_test)
+error_ridge = ErMtx(y_train, y_train_pred, y_test, y_test_pred)
+error_ridge['Model Name']='Ridge'
+error_ridge
+     
+{'Train_MAE': 128604.40453355381,
+ 'Train_MSE': 138362184684728.08,
+ 'Train_RMAE': np.float64(11762745.626966864),
+ 'Train_R2_Score': 3.8206034864707306e-06,
+ 'Test_MAE': 265313.5686507871,
+ 'Test_MSE': 500938197206308.06,
+ 'Test_RMAE': np.float64(22381648.67042435),
+ 'Test_R2_Score': -2.8093967102460482e-05,
+ 'Model Name': 'Ridge'}
+
+model_evaluation = pd.concat([model_evaluation, (pd.DataFrame([error_ridge]))],ignore_index=True)
+model_evaluation
+     
+Train_MAE	Train_MSE	Train_RMAE	Train_R2_Score	Test_MAE	Test_MSE	Test_RMAE	Test_R2_Score	Model Name
+0	128641.80	138362184547413.89	11762745.62	0.00	265422.83	500938166778833.25	22381647.99	-0.00	Linear Regression
+1	128597.78	138362184644358.95	11762745.63	0.00	265376.96	500938218691615.38	22381649.15	-0.00	Lasso
+2	128604.40	138362184684728.08	11762745.63	0.00	265313.57	500938197206308.06	22381648.67	-0.00	Ridge
+
+```
 
 Conclusion & Recommendation
 ---
