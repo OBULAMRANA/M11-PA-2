@@ -95,6 +95,37 @@ min	0.00
 max	5000000.00
 ```
 
+```
+irq_data_lost = 1 - (df_irq.shape[0]/df.shape[0])
+print("We lost {:.2%} of the data by the IRQ method" .format(irq_data_lost))
+     
+We lost 98.08% of the data by the IRQ method
+
+
+df_irq['price'].describe()
+     
+price
+count	8177.00
+mean	3088930.26
+std	87973256.90
+min	57400.00
+25%	61000.00
+50%	67995.00
+75%	77999.00
+max	3736928711.00
+
+```
+Violin plot - title_status vs price log
+---
+![image](https://github.com/user-attachments/assets/070554cb-b558-4365-a19c-8897e1b64b00)
+
+
+Violin plot - condition vs price log
+---
+![image](https://github.com/user-attachments/assets/fc14714d-a9c9-4d11-93e8-4231e5be213b)
+
+
+
 
 
 
