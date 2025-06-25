@@ -8,6 +8,7 @@ Dataset information
 The provided dataset contains information on 426K cars to ensure the speed of processing. Your goal is to understand what factors make a car more or less expensive. As a result of your analysis, you should provide clear recommendations to your client—a used car dealership—as to what consumers value in a used car.
 
 DataSet info: Dataset has 426880 records and 18 columns.
+
 Data Source: [https://github.com/OBULAMRANA/accept_coupon/blob/main/coupons.csv](https://github.com/OBULAMRANA/M11-PA-2/blob/main/vehicles.csv.zip)
 
 Python Code: [https://github.com/OBULAMRANA/M11-PA-2/blob/main/M11_PA_2.ipynb](https://github.com/OBULAMRANA/M11-PA-2/blob/main/M11_PA_2.ipynb)
