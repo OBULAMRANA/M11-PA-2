@@ -10,7 +10,7 @@ The provided dataset contains information on 426K cars to ensure the speed of pr
 DataSet info: Dataset has 426880 records and 18 columns.
 Data Source: [https://github.com/OBULAMRANA/accept_coupon/blob/main/coupons.csv](https://github.com/OBULAMRANA/M11-PA-2/blob/main/vehicles.csv.zip)
 
-Python Code: [https://github.com/OBULAMRANA/accept_coupon/blob/main/accept_coupon.ipynb](https://github.com/OBULAMRANA/M11-PA-2/blob/main/M11_PA_2.ipynb)
+Python Code: [https://github.com/OBULAMRANA/M11-PA-2/blob/main/M11_PA_2.ipynb](https://github.com/OBULAMRANA/M11-PA-2/blob/main/M11_PA_2.ipynb)
 
 ### Data Understanding & Cleaning
 ---
