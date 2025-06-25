@@ -125,7 +125,20 @@ Violin plot - condition vs price log
 ![image](https://github.com/user-attachments/assets/fc14714d-a9c9-4d11-93e8-4231e5be213b)
 
 
+Conclusion & Recommendation
+---
 
+Out of all the columns gien in dataset, columns named 'region', 'manufacturer', 'model', 'drive', 'size', 'type', 'paint_color' & 'state' as too many categorical variables that will be overfitting the model and hence ignored those column data. If we apply One-Hot encoding on those columns, its going to generate 100s of columns which will overload the model to process.
+
+Column named 'id', 'VIN', 'fuel', & 'cylinders' does not play a role on car price and hence dropped from the DataSet
+
+Column named 'odometer', 'title_status' & 'condition' is going to play a role as per domain knowledge that I have and hence considered for modeling. Applied one-hot encoding on catorigical data like 'title_status' & 'condition' and applied three different models like Linear-Regression, Losso-Regression and Ridge-Regression and all these three models gives almost ~0 on Train_R2_Score and Test_R2_Score. This shows the the models are under-fit and hence not able to predict actual price of the model
+
+This under-fitting could be due to the 'most_frequent' imputer method used to fillin missing data for columns 'title_status' & 'condition'.
+
+Violin plot on 'title_status' VS PriceLog & 'condition' VS PriceLog shows that the dependency is almost close to mean of the given data and hence the model. This data suggests that the model might be able to predict actual value given the data considered for models designed.
+
+Overall the suggestions would be that the 'odometer', 'title_status' & 'condition' is going to play a role on price of a car!
 
 
 
